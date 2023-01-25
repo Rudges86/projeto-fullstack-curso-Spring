@@ -8,8 +8,12 @@ import { Cliente } from "../clientes";
 })
 export class ClientesFormComponent implements OnInit {
   cliente: Cliente;
+<<<<<<< HEAD
   sucess:boolean = false;
   errors:string[]
+=======
+
+>>>>>>> frontend
   constructor(private clientesService:ClientesService) { 
     this.cliente = clientesService.getCliente();
   }
@@ -17,6 +21,7 @@ export class ClientesFormComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit() { 
+<<<<<<< HEAD
     this.clientesService.salvar(this.cliente).subscribe({
       next:(response) => {
         this.sucess = true;
@@ -28,5 +33,8 @@ export class ClientesFormComponent implements OnInit {
         this.sucess = false;
       }
     });
+=======
+    this.clientesService.salvar(this.cliente).subscribe((x) =>  console.log(x))
+>>>>>>> frontend
   }
 }
