@@ -48,4 +48,5 @@ public class ClienteController {
         List<Cliente> lista = clienteService.listaTodos();
         return ResponseEntity.status(HttpStatus.OK).body(lista);
     }
+    //Al
 }
