@@ -14,7 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/clientes")
-
+//normalmente eu utilizo @CrossOrigin(origin="*", maxAge = 36000)
+//No curso foi utilizadoo @CrossOrigin("http://localhost:4200")
+//Mas neste projeto eu fiz uma class de configuração chamada webconfig
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
@@ -22,8 +24,7 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<Cliente> salvar(@RequestBody @Valid Cliente cliente){
-        clienteService.save(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
     }
 
     @GetMapping("/{id}")
@@ -48,5 +49,6 @@ public class ClienteController {
         List<Cliente> lista = clienteService.listaTodos();
         return ResponseEntity.status(HttpStatus.OK).body(lista);
     }
-    //Al
+
+
 }
