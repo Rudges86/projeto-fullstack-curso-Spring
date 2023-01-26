@@ -23,13 +23,19 @@ export class ClientesService {
   /*getClientes():Observable<Cliente[]>{
     return null;
   }*/
-  getClientes(): Cliente[]{
-    let cliente = new Cliente;
-    cliente.id = 1;
-    cliente.nome = "fulano";
-    cliente.dataCadastro = "18/04/2020";
-    cliente.cpf="12345678910";
-    return [cliente];
+  getClientes(): Observable<Cliente[]>{
+    return this.http.get<Cliente[]>(this.url);
   }
 
+  getClienteById(id:number):Observable<Cliente>{
+    return this.http.get<Cliente>(`${this.url}/${id}`);
+  }
+
+  atualizarCliente(cliente:Cliente):Observable<Cliente>{
+    return this.http.put<Cliente>(`${this.url}/${cliente.id}`,cliente);
+  }
+
+  deletarcliente(cliente:Cliente):Observable<Cliente>{
+    return this.http.delete<Cliente>(`${this.url}/${cliente.id}`);
+  }
 }

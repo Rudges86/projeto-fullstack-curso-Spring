@@ -4,8 +4,18 @@
 </ol>
 <div class="container">
     <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert" *ngIf="messageSuccess">
+                <p>Cliente Salvo com Sucesso</p>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="messageError">
+                <p>{{messageError}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-2">
-            <button class="btn btn-warning"><i class="fa fa-plus"></i>Novo</button>
+            <button class="btn btn-warning" (click)="novoCadastro()"><i class="fa fa-plus"></i>Novo</button>
         </div>
     </div>
     <br>
@@ -27,10 +37,38 @@
                         <th>{{cliente.nome}}</th>
                         <th>{{cliente.cpf}}</th>
                         <th>{{cliente.dataCadastro}}</th>
-                        <th></th>
+                        <th>
+                            <button class="btn btn-primary" (click)="edit(cliente.id)">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger ml-3" data-toggle="modal" data-target="#modalDelecao" 
+                            (click)="preparaDelecao(cliente)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </th>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+<!--Modal-->
+    <div id="modalDelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirmação</h4>
+                </div>
+
+                <div class="modal-body" *ngIf="clienteSelecionado">
+                    <p>Confirma a deleção do (a) Cliente : {{clienteSelecionado.nome}} ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal" 
+                    (click)="deletarCliente(clienteSelecionado)">Confirmar</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancela</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>
